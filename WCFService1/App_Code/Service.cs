@@ -52,7 +52,7 @@ public class Service : IService
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                List<EmpleadosItem> persons = JsonConvert.DeserializeObject<List<EmpleadosItem>>(result);
+                List<Items> persons = JsonConvert.DeserializeObject<List<Items>>(result);
                 
                 data = JsonConvert.SerializeObject(persons);
             }
