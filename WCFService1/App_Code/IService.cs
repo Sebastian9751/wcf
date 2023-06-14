@@ -31,6 +31,17 @@ public interface IService
     string PostNewItem(int id, string nombreItem, string description, bool status);
     [OperationContract]
     string PostAsignation(int id_persona, int itemId, DateTime dia_asignacion, DateTime dia_entrega, DateTime dia_liberacion);
+    string login(string email, string password);
+    [OperationContract]
+    string PUTstatusitem(int id_item, bool status);
+    [OperationContract]
+    string PUTitem(int id, string nombreitem, string description, bool status);
+    [OperationContract]
+    string PUTpersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento);
+    [OperationContract]
+    string DeleteItem(int id);
+    [OperationContract]
+    string DeletePersona(int id);
 
 
 
