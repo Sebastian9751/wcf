@@ -11,35 +11,31 @@ using System.Text;
 // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
 public class Service : IService
 {
-	public string GetData(int value)
-	{
-		return string.Format("You entered: {0}", value);
-	}
-
 	
 
-    public string getUserById(int id)
+    public string getEmpleadoById(int id)
     {
         string data = "";
         try
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona/items").Result;
+            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona/itemsById?id=" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                List<EmpleadosItem> persons = JsonConvert.DeserializeObject<List<EmpleadosItem>>(result);
-                var person = persons.FirstOrDefault(x => x.persona.id == id);
-                data = JsonConvert.SerializeObject(person);
+                data = result;
             }
         }
         catch (Exception e)
         {
-            data = e.Message;
+            // Manejo de errores
+            Console.WriteLine("Error: " + e.Message);
         }
         return data;
     }
+
+
 
     public string getItems()
     {
@@ -213,6 +209,31 @@ public class Service : IService
         }
         return data;
     }
+
+    public string getPersona()
+    {
+        string data = "";
+        try
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                List<Persona> persons = JsonConvert.DeserializeObject<List<Persona>>(result);
+
+                data = JsonConvert.SerializeObject(persons);
+            }
+        }
+        catch (Exception e)
+        {
+            data = e.Message;
+        }
+        return data;
+    }
+
+  
 }
 
 

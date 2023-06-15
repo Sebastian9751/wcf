@@ -11,20 +11,24 @@ using System.Text;
 public interface IService
 {
 
-	[OperationContract]
-	string GetData(int value);
+    // GETS
+    [OperationContract]
+    string getPersona();
 
 	[OperationContract]
-	string getUserById(int id);
+	string getEmpleadoById(int id);
+
+    [OperationContract]
+    List<EmpleadosItem> getEmpleadosItems();
+
     [OperationContract]
     string getItems();
     [OperationContract]
 
 	string getEmployes();
 
-    [OperationContract]
 
-	List<EmpleadosItem> getEmpleadosItems();
+    // POST/PUT
     [OperationContract]
     string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento);
     [OperationContract]
@@ -32,30 +36,5 @@ public interface IService
     [OperationContract]
     string PostAsignation(int id_persona, int itemId, DateTime dia_asignacion, DateTime dia_entrega, DateTime dia_liberacion);
 
-
-
-    // TODO: agregue aquí sus operaciones de servicio
 }
 
-// Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
-[DataContract]
-public class CompositeType
-{
-	bool boolValue = true;
-	string stringValue = "Hello ";
-
-	[DataMember]
-	public bool BoolValue
-	{
-		get { return boolValue; }
-		set { boolValue = value; }
-	}
-
-	[DataMember]
-	public string StringValue
-	{
-		get { return stringValue; }
-		set { stringValue = value; }
-	}
-
-}
