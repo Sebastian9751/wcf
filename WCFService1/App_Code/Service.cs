@@ -111,18 +111,19 @@ public class Service : IService
         return data;
 
     }
-    public string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento)
+    public string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento, string password)
     {
-        var newEmployee = new createEmployee
+        var newEmployee = new Persona
         {
-            id = id,
-            name = name,
-            lastname = lastname,
-            curp = curp,
-            rfc = rfc,
+            Id = id,
+            Name = name,
+            Lastname = lastname,
+            CURP = curp,
+            RFC = rfc,
             email = email,
             numero_empleado = numero_empleado,
-            fechaNacimiento = fechaNacimiento
+            FechaNacimiento = fechaNacimiento,
+            password = password
         };
         string data = "";
         try
@@ -329,7 +330,7 @@ public class Service : IService
         }
         return data;
     }
-    public string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento)
+    public string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento, string password)
     {
         var updatepersona = new Persona
         {
@@ -340,7 +341,8 @@ public class Service : IService
             RFC = rcf,
             email = email,
             numero_empleado = numero_empleado,
-            FechaNacimiento = fechaNacimiento
+            FechaNacimiento = fechaNacimiento,
+            password = password
 
         };
         string data = "";

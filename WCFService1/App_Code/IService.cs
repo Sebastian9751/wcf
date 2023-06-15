@@ -30,7 +30,7 @@ public interface IService
 
     // POST/PUT
     [OperationContract]
-    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento);
+    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento, string password);
     [OperationContract]
     string PostNewItem(int id, string nombreItem, string description, bool status);
     [OperationContract]
@@ -40,7 +40,7 @@ public interface IService
     [OperationContract]
     string PutItem(int id, string nombreitem, string description, bool status);
     [OperationContract]
-    string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento);
+    string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento, string password);
     [OperationContract]
     string DeleteItem(int id);
     [OperationContract]
