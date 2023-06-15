@@ -11,35 +11,31 @@ using System.Text;
 // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
 public class Service : IService
 {
-	public string GetData(int value)
-	{
-		return string.Format("You entered: {0}", value);
-	}
 
-	
 
-    public string getUserById(int id)
+    public string getEmpleadoById(int id)
     {
         string data = "";
         try
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona/items").Result;
+            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona/itemsById?id=" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                List<EmpleadosItem> persons = JsonConvert.DeserializeObject<List<EmpleadosItem>>(result);
-                var person = persons.FirstOrDefault(x => x.persona.id == id);
-                data = JsonConvert.SerializeObject(person);
+                data = result;
             }
         }
         catch (Exception e)
         {
-            data = e.Message;
+            // Manejo de errores
+            Console.WriteLine("Error: " + e.Message);
         }
         return data;
     }
+
+
 
     public string getItems()
     {
@@ -52,8 +48,8 @@ public class Service : IService
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                List<EmpleadosItem> persons = JsonConvert.DeserializeObject<List<EmpleadosItem>>(result);
-                
+                List<Items> persons = JsonConvert.DeserializeObject<List<Items>>(result);
+
                 data = JsonConvert.SerializeObject(persons);
             }
         }
@@ -214,9 +210,37 @@ public class Service : IService
         return data;
     }
 
+    public string getPersona()
+    {
+        string data = "";
+        try
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            var response = client.GetAsync("https://www.apisoanet.somee.com/api/persona").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                List<Persona> persons = JsonConvert.DeserializeObject<List<Persona>>(result);
+
+                data = JsonConvert.SerializeObject(persons);
+            }
+        }
+        catch (Exception e)
+        {
+            data = e.Message;
+        }
+        return data;
+    }
+    public string PutPersona()
+    {
+        string data = "";
+        return data;
+    }
+
     public string login(string email, string password)
     {
-        var login = new logindata
+        var login = new Persona
         {
             email = email,
             password = password
@@ -244,11 +268,11 @@ public class Service : IService
         return data;
     }
 
-    public string PUTstatusitem(int id_item, bool status)
+    public string PutStatusItem(int id_item, bool status)
     {
-        var updateitem = new UpdateItemStatus
+        var updateitem = new Items
         {
-            id_item = id_item,
+            id = id_item,
             status = status
         };
         string data = "";
@@ -274,7 +298,7 @@ public class Service : IService
         return data;
     }
 
-    public string PUTitem(int id, string nombreitem, string description, bool status)
+    public string PutItem(int id, string nombreitem, string description, bool status)
     {
         var updateitem = new createItem
         {
@@ -305,19 +329,18 @@ public class Service : IService
         }
         return data;
     }
-
-    public string PUTpersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento)
+    public string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento)
     {
-        var updatepersona = new UpdatePersona
+        var updatepersona = new Persona
         {
             Id = id,
-            name = name,
-            lastname = lastname,
-            curp = curp,
-            rfc = rcf,
+            Name = name,
+            Lastname = lastname,
+            CURP = curp,
+            RFC = rcf,
             email = email,
             numero_empleado = numero_empleado,
-            fechaNacimiento = fechaNacimiento
+            FechaNacimiento = fechaNacimiento
 
         };
         string data = "";
@@ -345,62 +368,47 @@ public class Service : IService
 
     public string DeleteItem(int id)
     {
-        var DeleteItem = new Items
-        {
-            id = id
-        };
-        string data = "";
+        string responseModel = "";
         try
         {
-            string urlPUT = "https://www.apisoanet.somee.com/api/items/delete";
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            var P = JsonConvert.SerializeObject(DeleteItem);
-            var request = new StringContent(P, Encoding.UTF8, "application/json");
-            var response = client.PutAsync(urlPUT, request).Result;
+            var response = client.DeleteAsync("https://www.apisoanet.somee.com/api/items/delete?id=" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                var ResponseRequest = JsonConvert.DeserializeObject<string>(result);
-                data = JsonConvert.SerializeObject(ResponseRequest);
+                responseModel = result;
             }
         }
         catch (Exception e)
         {
-            data = e.Message;
+            // Manejo de errores
+            Console.WriteLine("Error: " + e.Message);
         }
-        return data;
+        return responseModel;
+
     }
 
     public string DeletePersona(int id)
     {
-        var Deletepersona = new Persona
-        {
-            Id = id
-        };
-        string data = "";
+        string responseModel = "";
         try
         {
-            string urlDELETE = "https://www.apisoanet.somee.com/api/persona/delete";
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            var P = JsonConvert.SerializeObject(Deletepersona);
-            var request = new StringContent(P, Encoding.UTF8, "application/json");
-            var response = client.PutAsync(urlDELETE, request).Result;
+            var response = client.DeleteAsync("https://www.apisoanet.somee.com/api/persona/delete?id=" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                var ResponseRequest = JsonConvert.DeserializeObject<string>(result);
-                data = JsonConvert.SerializeObject(ResponseRequest);
+                responseModel = result;
             }
         }
         catch (Exception e)
         {
-            data = e.Message;
+            // Manejo de errores
+            Console.WriteLine("Error: " + e.Message);
         }
-        return data;
+        return responseModel;
     }
+
 }
-
-
-
