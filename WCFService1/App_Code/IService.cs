@@ -11,62 +11,44 @@ using System.Text;
 public interface IService
 {
 
-	[OperationContract]
-	string GetData(int value);
+    // GETS
+    [OperationContract]
+    string getPersona();
+
+
+
 
 	[OperationContract]
-	string getUserById(int id);
+	string getEmpleadoById(int id);
+
+  [OperationContract]
+   List<EmpleadosItem> getEmpleadosItems();
+
     [OperationContract]
     string getItems();
     [OperationContract]
 
-	string getEmployes();
+    string getEmployes();
 
-    [OperationContract]
 
-	List<EmpleadosItem> getEmpleadosItems();
+    // POST/PUT
     [OperationContract]
-    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento);
+    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento, string password);
     [OperationContract]
     string PostNewItem(int id, string nombreItem, string description, bool status);
     [OperationContract]
     string PostAsignation(int id_persona, int itemId, DateTime dia_asignacion, DateTime dia_entrega, DateTime dia_liberacion);
-    string login(string email, string password);
     [OperationContract]
-    string PUTstatusitem(int id_item, bool status);
+    string PutStatusItem(int id_item, bool status);
     [OperationContract]
-    string PUTitem(int id, string nombreitem, string description, bool status);
+    string PutItem(int id, string nombreitem, string description, bool status);
     [OperationContract]
-    string PUTpersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento);
+    string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento, string password);
     [OperationContract]
     string DeleteItem(int id);
     [OperationContract]
     string DeletePersona(int id);
 
-
-
-    // TODO: agregue aquí sus operaciones de servicio
 }
 
-// Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
-[DataContract]
-public class CompositeType
-{
-	bool boolValue = true;
-	string stringValue = "Hello ";
 
-	[DataMember]
-	public bool BoolValue
-	{
-		get { return boolValue; }
-		set { boolValue = value; }
-	}
-
-	[DataMember]
-	public string StringValue
-	{
-		get { return stringValue; }
-		set { stringValue = value; }
-	}
-
-}
