@@ -12,7 +12,6 @@ using System.Text;
 public class Service : IService
 {
 
-
     public string getEmpleadoById(int id)
     {
         string data = "";
@@ -210,6 +209,7 @@ public class Service : IService
         }
         return data;
     }
+
 
     public string getPersona()
     {
