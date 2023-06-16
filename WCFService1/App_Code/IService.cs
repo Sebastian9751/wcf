@@ -45,7 +45,10 @@ public interface IService
     string DeleteItem(int id);
     [OperationContract]
     string DeletePersona(int id);
-
+    [OperationContract]
+    string login(string username, string password);
+    [OperationContract]
+    string SentEmail();
 }
 
 

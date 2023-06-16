@@ -413,4 +413,24 @@ public class Service : IService
         return responseModel;
     }
 
+    public string SentEmail()
+    {
+        string data = "";
+        try
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            var response = client.GetAsync("https://www.apisoanet.somee.com/api/email/message").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                data = response.Content.ReadAsStringAsync().Result;
+            }
+        }
+        catch (Exception e)
+        {
+            data = e.Message;
+        }
+        return data;
+    }
+
 }
