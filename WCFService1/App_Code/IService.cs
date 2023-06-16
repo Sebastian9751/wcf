@@ -18,23 +18,34 @@ public interface IService
 	[OperationContract]
 	string getEmpleadoById(int id);
 
-    [OperationContract]
-    List<EmpleadosItem> getEmpleadosItems();
+  [OperationContract]
+   List<EmpleadosItem> getEmpleadosItems();
 
     [OperationContract]
     string getItems();
     [OperationContract]
 
-	string getEmployes();
+    string getEmployes();
 
 
     // POST/PUT
     [OperationContract]
-    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento);
+    string PostNewEmployee(int id, string name, string lastname, string curp, string rfc, string email, int numero_empleado, DateTime fechaNacimiento, string password);
     [OperationContract]
     string PostNewItem(int id, string nombreItem, string description, bool status);
     [OperationContract]
     string PostAsignation(int id_persona, int itemId, DateTime dia_asignacion, DateTime dia_entrega, DateTime dia_liberacion);
+    [OperationContract]
+    string PutStatusItem(int id_item, bool status);
+    [OperationContract]
+    string PutItem(int id, string nombreitem, string description, bool status);
+    [OperationContract]
+    string PutPersona(int id, string name, string lastname, string curp, string rcf, string email, int numero_empleado, DateTime fechaNacimiento, string password);
+    [OperationContract]
+    string DeleteItem(int id);
+    [OperationContract]
+    string DeletePersona(int id);
 
 }
+
 
