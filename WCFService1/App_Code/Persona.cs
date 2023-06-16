@@ -16,7 +16,7 @@ public class Persona
    
     public string lastname { get; set; }
    
-    public string cur{ get; set; }
+    public string curp{ get; set; }
   
     public string rfc { get; set; }
 

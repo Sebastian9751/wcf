@@ -114,14 +114,14 @@ public class Service : IService
     {
         var newEmployee = new Persona
         {
-            Id = id,
-            Name = name,
-            Lastname = lastname,
-            CURP = curp,
-            RFC = rfc,
+            id = id,
+            name = name,
+            lastname = lastname,
+            curp = curp,
+            rfc = rfc,
             email = email,
             numero_empleado = numero_empleado,
-            FechaNacimiento = fechaNacimiento,
+            fechaNacimiento = fechaNacimiento,
             password = password
         };
         string data = "";
@@ -334,14 +334,14 @@ public class Service : IService
     {
         var updatepersona = new Persona
         {
-            Id = id,
-            Name = name,
-            Lastname = lastname,
-            CURP = curp,
-            RFC = rcf,
+            id = id,
+            name = name,
+            lastname = lastname,
+            curp = curp,
+            rfc = rcf,
             email = email,
             numero_empleado = numero_empleado,
-            FechaNacimiento = fechaNacimiento,
+            fechaNacimiento = fechaNacimiento,
             password = password
 
         };
