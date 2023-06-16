@@ -12,9 +12,9 @@ public class Items
 {
     public int id { get; set; }
 
-    public string NombreItem { get; set; }
+    public string nombreItem { get; set; }
 
-    public string Description { get; set; }
+    public string description { get; set; }
 
 
 

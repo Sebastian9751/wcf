@@ -15,9 +15,6 @@ public interface IService
     [OperationContract]
     string getPersona();
 
-
-
-
 	[OperationContract]
 	string getEmpleadoById(int id);
 

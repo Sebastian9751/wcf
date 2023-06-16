@@ -10,15 +10,15 @@ using System.Web;
 public class Persona
 {
     
-    public int Id { get; set; }
+    public int id { get; set; }
     
-    public string Name { get; set; }
+    public string name { get; set; }
    
-    public string Lastname { get; set; }
+    public string lastname { get; set; }
    
-    public string CURP { get; set; }
+    public string cur{ get; set; }
   
-    public string RFC { get; set; }
+    public string rfc { get; set; }
 
    
     public string email { get; set; }
@@ -27,7 +27,7 @@ public class Persona
     public int numero_empleado { get; set; }
 
    
-    public DateTime FechaNacimiento { get; set; }
+    public DateTime fechaNacimiento { get; set; }
 
    
     public string password { get; set; }
